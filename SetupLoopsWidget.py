@@ -347,7 +347,7 @@ class LoopsWidget(QWidget):
             try:
                 lower = float(self.textbox_lower_limit.text())
                 upper = float(self.textbox_upper_limit.text())
-                num = float(self.textbox_num.text())
+                num = int(self.textbox_num.text())
                 delay = float(self.textbox_step.text())
                 sweep_division = float(self.sweep_parameter_divider.text())
             except Exception as e:
@@ -381,7 +381,7 @@ class LoopsWidget(QWidget):
 
                 # pass dereferenced list of actions to a loops each method
                 if len(self.instruments):
-                    lp = qc.Loop(sweep_parameter.sweep(lower, upper, num=num), delay, progress_interval=20).each(*actions)
+                    lp = qc.loops.Loop(sweep_parameter.sweep(lower, upper, num=num), delay, progress_interval=20).each(*actions)
                 else:
                     show_error_message("Warning", "U can't make a loop without instruments !")
                     return
